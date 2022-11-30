@@ -1,43 +1,47 @@
 package zimareva.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import zimareva.model.dto.BoxDTO;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "box")
 public class Box {
     @Id
-    @SequenceGenerator(name = "box_seq", sequenceName = "box_sequence")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "box_seq")
+    /*@SequenceGenerator(name = "box_seq", sequenceName = "box_sequence")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "box_seq")*/
     private Long id;
 
-    //todo: может оставить только OneToMany?
     //todo: может отказаться от параметризации. Или лучше создать общий интерфейс (или абстрактный класс), чтобы не было миллион листов
     @OneToMany(
-            mappedBy = "box"
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL
     )
-    @JsonIgnoreProperties("box")
+    @JoinColumn(name = "contained_in")
     private List<Box> boxList = new ArrayList<>();
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "contained_in")
-    @JsonIgnoreProperties("boxList")
-    private Box box;
-
     @OneToMany(
-            mappedBy = "box"
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL
     )
-    @JsonIgnoreProperties("box")
+    @JoinColumn(name = "contained_in")
     private List<Item> items = new ArrayList<>();
 
     public Box() {
     }
 
-    public Box(Box box) {
-        this.box = box;
+    public Box(Long id, List<Box> boxList, List<Item> items) {
+        this.id = id;
+        this.boxList = boxList;
+        this.items = items;
+    }
+
+    public Box(List<Box> boxList, List<Item> items) {
+        this.boxList = boxList;
+        this.items = items;
     }
 
     public Long getId() {
@@ -56,14 +60,6 @@ public class Box {
         this.boxList = boxList;
     }
 
-    public Box getBox() {
-        return box;
-    }
-
-    public void setBox(Box box) {
-        this.box = box;
-    }
-
     public List<Item> getItems() {
         return items;
     }
@@ -72,12 +68,19 @@ public class Box {
         this.items = items;
     }
 
+    public static Box from(BoxDTO boxDTO){
+        Box box = new Box();
+        box.setId(boxDTO.getId());
+        box.setBoxList(boxDTO.getBoxList().stream().map(Box::from).collect(Collectors.toList()));
+        box.setItems(boxDTO.getItems().stream().map(Item::from).collect(Collectors.toList()));
+        return box;
+    }
+
     @Override
     public String toString() {
         return "Box{" +
                 "id=" + id +
                 ", boxList=" + boxList +
-                ", box=" + box +
                 ", items=" + items +
                 '}';
     }

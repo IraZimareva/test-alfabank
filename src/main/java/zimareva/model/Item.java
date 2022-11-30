@@ -1,6 +1,6 @@
 package zimareva.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import zimareva.model.dto.ItemDTO;
 
 import javax.persistence.*;
 
@@ -8,22 +8,15 @@ import javax.persistence.*;
 @Table(name = "item")
 public class Item {
     @Id
-    @SequenceGenerator(name = "item_seq", sequenceName = "item_sequence")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_seq")
+    /*@SequenceGenerator(name = "item_seq", sequenceName = "item_sequence")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_seq")*/
     private Long id;
-
-    //todo: думаю, что от этого можно отказаться вполне
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "contained_in")
-    @JsonIgnoreProperties("items")
-    private Box box;
     private String color;
 
     public Item() {
     }
 
-    public Item(Box box, String color) {
-        this.box = box;
+    public Item(String color) {
         this.color = color;
     }
 
@@ -35,14 +28,6 @@ public class Item {
         this.id = id;
     }
 
-    public Box getBox() {
-        return box;
-    }
-
-    public void setBox(Box box) {
-        this.box = box;
-    }
-
     public String getColor() {
         return color;
     }
@@ -51,11 +36,17 @@ public class Item {
         this.color = color;
     }
 
+    public static Item from(ItemDTO itemDTO){
+        Item item = new Item();
+        item.setId(itemDTO.getId());
+        item.setColor(itemDTO.getColor());
+        return item;
+    }
+
     @Override
     public String toString() {
         return "Item{" +
                 "id=" + id +
-                ", box=" + box +
                 ", color='" + color + '\'' +
                 '}';
     }
