@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings version="2.0" xmlns="http://java.sun.com/xml/ns/persistence/orm"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm
+        http://java.sun.com/xml/ns/persistence/orm_2_0.xsd ">
+
+    <!--native SQL query to find ids of Items by color and id of Box where it contained-->
+    <named-native-query name="Item.findIdsByColorAndBoxId">
+        <query>
+			WITH tree (id, contained_in) AS
+			(
+				SELECT id, contained_in
+				FROM box
+				WHERE id = :idBox
+
+				UNION ALL
+
+				SELECT e.id, e.contained_in
+				FROM tree
+				inner JOIN box as e
+				ON tree.id = e.contained_in
+			)
+
+			SELECT item.id FROM tree
+			join item on tree.id = item.contained_in
+			WHERE color= :color
+		</query>
+    </named-native-query>
+
+</entity-mappings>

@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 @Entity
 @Table(name = "box")
 public class Box {
+    //todo: можно ли оставить генерацию айдишников, но при этом присваивать их из файла?
     @Id
     /*@SequenceGenerator(name = "box_seq", sequenceName = "box_sequence")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "box_seq")*/

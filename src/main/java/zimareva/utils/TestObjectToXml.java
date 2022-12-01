@@ -16,6 +16,7 @@ import java.io.FileReader;
 import java.util.Arrays;
 import java.util.List;
 
+//todo: сделать нормальные тесты вместо этого класса
 public class TestObjectToXml {
     public static StorageDTO getTestData() {
         //TEST DATA
