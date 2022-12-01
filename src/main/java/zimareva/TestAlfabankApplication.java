@@ -18,14 +18,17 @@ import java.util.Arrays;
 @SpringBootApplication
 public class TestAlfabankApplication {
     public static void main(String[] args) {
+        //filepath src\\main\\resources\\input.xml
+        //mvn spring-boot:run -Dspring-boot.run.arguments="src\\main\\resources\\input.xml"
+
         ConfigurableApplicationContext configurableApplicationContext =
                 SpringApplication.run(TestAlfabankApplication.class, args);
 
+        /*
         BoxRepository boxRepository =
                 configurableApplicationContext.getBean(BoxRepository.class);
         ItemRepository itemRepository =
                 configurableApplicationContext.getBean(ItemRepository.class);
-/*
 
         //TEST DATA
         //Третий уровень иерархии
@@ -55,7 +58,7 @@ public class TestAlfabankApplication {
         try {
 //            TestObjectToXml.marshal();
 //            TestObjectToXml.unmarshall();
-            mainService.fillDB(XMLParser.unmarshall());
+            mainService.fillDB(XMLParser.unmarshall(args[0]));
         } catch (JAXBException e) {
             e.printStackTrace();
         } catch (FileNotFoundException e) {
