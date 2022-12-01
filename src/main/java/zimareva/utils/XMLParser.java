@@ -43,6 +43,6 @@ public class XMLParser {
                 break;
         }
 
-        return
+        return null;
     }
 }

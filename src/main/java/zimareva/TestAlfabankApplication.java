@@ -14,6 +14,7 @@ import zimareva.utils.XMLParser;
 import javax.xml.bind.JAXBException;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
+import java.util.List;
 
 @SpringBootApplication
 public class TestAlfabankApplication {
@@ -58,11 +59,20 @@ public class TestAlfabankApplication {
         try {
 //            TestObjectToXml.marshal();
 //            TestObjectToXml.unmarshall();
+//            mainService.fillDB(TestObjectToXml.unmarshall());
             mainService.fillDB(XMLParser.unmarshall(args[0]));
         } catch (JAXBException e) {
             e.printStackTrace();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+
+        //Тест нативного sql запроса
+        /*ItemRepository itemRepository =
+                configurableApplicationContext.getBean(ItemRepository.class);
+        List<Long> result = itemRepository.findIdsByColorAndBoxId(1L, "red");
+        System.out.println("Result of native query " + result);*/
+
+
     }
 }

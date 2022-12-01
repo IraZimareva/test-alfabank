@@ -10,12 +10,12 @@ import java.util.stream.Collectors;
 @Entity
 @Table(name = "box")
 public class Box {
+    //todo: можно ли оставить генерацию айдишников, но при этом присваивать их из файла?
     @Id
     /*@SequenceGenerator(name = "box_seq", sequenceName = "box_sequence")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "box_seq")*/
     private Long id;
 
-    //todo: может отказаться от параметризации. Или лучше создать общий интерфейс (или абстрактный класс), чтобы не было миллион листов
     @OneToMany(
             fetch = FetchType.EAGER,
             cascade = CascadeType.ALL

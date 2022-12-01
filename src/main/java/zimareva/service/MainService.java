@@ -8,6 +8,7 @@ import zimareva.model.dto.BoxDTO;
 import zimareva.model.dto.ItemDTO;
 import zimareva.model.dto.StorageDTO;
 
+//todo: дропнуть. Не нужен. Утилитную логику вынести
 @Service
 public class MainService {
 
