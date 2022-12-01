@@ -16,7 +16,6 @@ public class Box {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "box_seq")*/
     private Long id;
 
-    //todo: может отказаться от параметризации. Или лучше создать общий интерфейс (или абстрактный класс), чтобы не было миллион листов
     @OneToMany(
             fetch = FetchType.EAGER,
             cascade = CascadeType.ALL

@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import zimareva.model.transferJSON.RequestJSON;
 import zimareva.service.ItemService;
 
+import java.math.BigInteger;
 import java.util.List;
 
 @RestController
@@ -20,7 +21,7 @@ public class MainController {
 
     @PostMapping
     @ResponseBody
-    public List<Long> getIdsByIdsAndColor(@RequestBody final RequestJSON requestJSON) {
+    public List<BigInteger> getIdsByIdsAndColor(@RequestBody final RequestJSON requestJSON) {
         return itemService.getIdsByIdsAndColor(requestJSON);
     }
 }

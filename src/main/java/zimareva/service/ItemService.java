@@ -6,6 +6,7 @@ import zimareva.model.Item;
 import zimareva.model.transferJSON.RequestJSON;
 import zimareva.repository.ItemRepository;
 
+import java.math.BigInteger;
 import java.util.List;
 
 @Service
@@ -22,10 +23,9 @@ public class ItemService {
         return itemRepository.save(item);
     }
 
-    //todo:сделать логику
-    public List<Long> getIdsByIdsAndColor(RequestJSON requestJSON){
-        System.out.println("box id " + requestJSON.getId());
+    public List<BigInteger> getIdsByIdsAndColor(RequestJSON requestJSON){
+        System.out.println("box id " + requestJSON.getBoxId());
         System.out.println("color " + requestJSON.getColor());
-        return itemRepository.findIdsByColorAndBoxId(requestJSON.getId(),requestJSON.getColor());
+        return itemRepository.findIdsByColorAndBoxId(requestJSON.getBoxId(), requestJSON.getColor());
     }
 }

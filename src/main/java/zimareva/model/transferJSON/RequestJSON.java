@@ -7,12 +7,12 @@ public class RequestJSON {
     public RequestJSON() {
     }
 
-    public Long getId() {
+    public Long getBoxId() {
         return boxId;
     }
 
-    public void setId(Long id) {
-        this.boxId = id;
+    public void setBoxId(Long boxId) {
+        this.boxId = boxId;
     }
 
     public String getColor() {

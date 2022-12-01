@@ -59,6 +59,7 @@ public class TestAlfabankApplication {
         try {
 //            TestObjectToXml.marshal();
 //            TestObjectToXml.unmarshall();
+//            mainService.fillDB(TestObjectToXml.unmarshall());
             mainService.fillDB(XMLParser.unmarshall(args[0]));
         } catch (JAXBException e) {
             e.printStackTrace();
