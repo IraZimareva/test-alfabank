@@ -24,7 +24,7 @@ Host: localhost <br>
 Accept: application/json <br>
 Content-Type:application/json <br>
 Content-Length: 25 <br>
-{"box":"1","color":"red"} <br>
+{"boxId":"1","color":"red"} <br>
 
 ***
 
