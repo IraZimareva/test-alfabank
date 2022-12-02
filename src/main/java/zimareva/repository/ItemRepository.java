@@ -8,10 +8,11 @@ import zimareva.model.Item;
 
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ItemRepository extends CrudRepository<Item, Long> {
     @Query(nativeQuery = true)
-    List<BigInteger> findIdsByColorAndBoxId(@Param("idBox") Long idBox,
-                                            @Param("color") String color);
+    Optional<List<BigInteger>> findIdsByColorAndBoxId(@Param("idBox") Long idBox,
+                                                     @Param("color") String color);
 }

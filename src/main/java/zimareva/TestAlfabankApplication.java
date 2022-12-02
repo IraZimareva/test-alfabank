@@ -13,14 +13,24 @@ import zimareva.utils.XMLParser;
 
 import javax.xml.bind.JAXBException;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
 
 @SpringBootApplication
 public class TestAlfabankApplication {
+    private static Logger logger = Logger.getLogger(TestAlfabankApplication.class.getName());
+
     public static void main(String[] args) {
-        //filepath src\\main\\resources\\input.xml
         //mvn spring-boot:run -Dspring-boot.run.arguments="src\\main\\resources\\input.xml"
+        //mvn spring-boot:run -Dspring-boot.run.arguments="file:src\\main\\resources\\input.xml"
+        //mvn spring-boot:run -Dspring-boot.run.arguments="url:file:///D:/ira/IdeaProject/test-alfabank/src/main/resources/input.xml"
+        //mvn spring-boot:run -Dspring-boot.run.arguments="classpath:input.xml"
+
+        //http://localhost:8080/h2/ - консоль СУБД Н2
+
 
         ConfigurableApplicationContext configurableApplicationContext =
                 SpringApplication.run(TestAlfabankApplication.class, args);
@@ -55,15 +65,20 @@ public class TestAlfabankApplication {
         MainService mainService =
                 configurableApplicationContext.getBean(MainService.class);
 
-        System.out.println("\n \n Test xml parsing");
+        logger.info("Test XML parsing start");
         try {
 //            TestObjectToXml.marshal();
 //            TestObjectToXml.unmarshall();
 //            mainService.fillDB(TestObjectToXml.unmarshall());
-            mainService.fillDB(XMLParser.unmarshall(args[0]));
+//            mainService.fillDB(XMLParser.unmarshall(args[0]));
+            mainService.parseFilepath(args[0]);
         } catch (JAXBException e) {
             e.printStackTrace();
         } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
 

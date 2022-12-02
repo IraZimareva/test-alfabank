@@ -2,6 +2,7 @@ package zimareva.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import zimareva.exception.IdsNotFoundException;
 import zimareva.model.Item;
 import zimareva.model.transferJSON.RequestJSON;
 import zimareva.repository.ItemRepository;
@@ -24,8 +25,7 @@ public class ItemService {
     }
 
     public List<BigInteger> getIdsByIdsAndColor(RequestJSON requestJSON){
-        System.out.println("box id " + requestJSON.getBoxId());
-        System.out.println("color " + requestJSON.getColor());
-        return itemRepository.findIdsByColorAndBoxId(requestJSON.getBoxId(), requestJSON.getColor());
+        return itemRepository.findIdsByColorAndBoxId(requestJSON.getBoxId(), requestJSON.getColor()).orElseThrow(() ->
+                new IdsNotFoundException(requestJSON.getBoxId(), requestJSON.getColor()));
     }
 }
