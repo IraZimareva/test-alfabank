@@ -22,6 +22,6 @@ public class MainController {
     @PostMapping
     @ResponseBody
     public List<BigInteger> getIdsByIdsAndColor(@RequestBody final RequestJSON requestJSON) {
-        return itemService.getIdsByIdsAndColor(requestJSON);
+        return itemService.getIdsByJSON(requestJSON);
     }
 }

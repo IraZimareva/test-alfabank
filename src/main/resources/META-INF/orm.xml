@@ -5,7 +5,7 @@
         http://java.sun.com/xml/ns/persistence/orm_2_0.xsd ">
 
     <!--native SQL query to find ids of Items by color and id of Box where it contained-->
-    <named-native-query name="Item.findIdsByColorAndBoxId">
+    <named-native-query name="Item.findItemsIdsByColorAndBoxId">
         <query>
 			WITH tree (id, contained_in) AS
 			(

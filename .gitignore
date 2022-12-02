@@ -10,6 +10,9 @@
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
+#File DB
+fileDB.mv.db
+
 #Ignore .idea files
 /.idea
 

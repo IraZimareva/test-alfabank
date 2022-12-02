@@ -28,7 +28,6 @@ public class MainService {
         this.itemService = itemService;
     }
 
-    //todo: можно оптимизировать: реализовать паттерн, сделать через ApllicationContext
     public void parseFilepath(String filepath) throws JAXBException, IOException {
         String[] splitFilepath = filepath.split(":", 2);
 
