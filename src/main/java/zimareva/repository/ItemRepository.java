@@ -13,6 +13,6 @@ import java.util.Optional;
 @Repository
 public interface ItemRepository extends CrudRepository<Item, Long> {
     @Query(nativeQuery = true)
-    Optional<List<BigInteger>> findIdsByColorAndBoxId(@Param("idBox") Long idBox,
-                                                     @Param("color") String color);
+    Optional<List<BigInteger>> findItemsIdsByColorAndBoxId(@Param("idBox") Long idBox,
+                                                           @Param("color") String color);
 }

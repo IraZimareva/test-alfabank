@@ -85,9 +85,7 @@ public class TestAlfabankApplication {
         //Тест нативного sql запроса
         /*ItemRepository itemRepository =
                 configurableApplicationContext.getBean(ItemRepository.class);
-        List<Long> result = itemRepository.findIdsByColorAndBoxId(1L, "red");
+        List<Long> result = itemRepository.findItemsIdsByColorAndBoxId(1L, "red");
         System.out.println("Result of native query " + result);*/
-
-
     }
 }

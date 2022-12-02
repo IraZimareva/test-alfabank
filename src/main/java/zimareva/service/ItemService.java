@@ -24,8 +24,8 @@ public class ItemService {
         return itemRepository.save(item);
     }
 
-    public List<BigInteger> getIdsByIdsAndColor(RequestJSON requestJSON){
-        return itemRepository.findIdsByColorAndBoxId(requestJSON.getBoxId(), requestJSON.getColor()).orElseThrow(() ->
+    public List<BigInteger> getIdsByJSON(RequestJSON requestJSON){
+        return itemRepository.findItemsIdsByColorAndBoxId(requestJSON.getBoxId(), requestJSON.getColor()).orElseThrow(() ->
                 new IdsNotFoundException(requestJSON.getBoxId(), requestJSON.getColor()));
     }
 }
